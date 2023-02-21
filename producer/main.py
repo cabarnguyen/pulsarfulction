@@ -6,10 +6,13 @@ docker exec -it pulsar /pulsar/bin/pulsar-client consume persistent://public/def
 
 import pulsar
 
-client = pulsar.Client('pulsar://localhost:6650')
+serverUrl = "pulsar://localhost:6650"
+topic =  'persistent://public/default/mytopic'
+
+client = pulsar.Client(serverUrl)
 
 producer = client.create_producer(
-    'persistent://public/default/mytopic',
+    topic,
     block_if_queue_full= True,
     batching_enabled= True,
     batching_max_publish_delay_ms= 10)
