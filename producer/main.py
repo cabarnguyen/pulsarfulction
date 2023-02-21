@@ -15,5 +15,5 @@ producer = client.create_producer(
     batching_max_publish_delay_ms= 10)
 
 for i in range(10):
-    producer.send(('Hello-%d' % i).encode('utf-8'))
+    producer.send(('Hello cabar 123-%d' % i).encode('utf-8'))
 client.close()
