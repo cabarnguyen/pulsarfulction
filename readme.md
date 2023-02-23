@@ -1,8 +1,8 @@
-List all the clusters in the Pulsar instance.​
+- List all the clusters in the Pulsar instance.​
 
 docker exec -it pulsar /pulsar/bin/pulsar-admin clusters list​
 
-List all the tenants in the Pulsar instance.​
+ -List all the tenants in the Pulsar instance.​
 
 docker exec -it pulsar /pulsar/bin/pulsar-admin tenants list​
 
