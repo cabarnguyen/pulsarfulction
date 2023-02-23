@@ -1,0 +1,58 @@
+from pulsar import Function
+
+# The classic ExclamationFunction that appends an exclamation at the end
+# of the input
+class ExclamationFunction(Function):
+  def __init__(self):
+    pass
+
+  def process(self, input, context):
+    return input + '!'
+
+
+
+pip3 download \
+--only-binary :all: \
+--platform manylinux1_x86_64 \
+--python-version 38 \
+-r requirements.txt \
+-d deps
+
+
+
+bin/pulsar-admin functions create localrun \
+--py ../examples/python-examples/exclamation_function.py \
+--classname exclamation_function.ExclamationFunction \
+--inputs persistent://public/default/input-1 \
+--output persistent://public/default/output-1
+
+
+myTest.py
+def process(input):
+    return input.upper()
+
+
+bin/pulsar-admin functions localrun --py myFun.py --classname myFun --tenant public --namespace default --inputs persistent://public/default/input-1 --output persistent://public/default/output-1 --name myFun
+bin/pulsar-admin functions create --py myFun.py --classname myFun --tenant public --namespace default --inputs persistent://public/default/input-1 --output persistent://public/default/output-1 --name myFun
+
+
+bin/pulsar-admin functions create --py myFun.py --classname myFun --tenant public --namespace default --inputs persistent://public/default/input-1 --output persistent://public/default/output-1 --name myFunTest
+bin/pulsar-admin functions update --py myFun.py --classname myFun --tenant public --namespace default --inputs persistent://public/default/input-1 --output persistent://public/default/output-1 --name myFunTest
+bin/pulsar-admin functions status --tenant public --namespace default --name myFunTest
+bin/pulsar-admin functions get --tenant public --namespace default --name myFunTest
+bin/pulsar-admin functions stop --name myFun
+bin/pulsar-admin functions start --name myFunTest
+bin/pulsar-admin functions delete --tenant public --namespace default --name myFun
+bin/pulsar-client produce -m "hello world" -n 10 persistent://public/default/input-1
+bin/pulsar-client consume  persistent://public/default/output-1 -s sub1 -n 0
+bin/pulsar-client consume  persistent://public/default/input-1 -s sub1 -n 0
+bin/pulsar-client consume  -s test-sub-2 -n 0 persistent://public/default/output-1
+
+bin/pulsar-admin functions create --py ../myF.zip --function-config-file myconfig.yaml
+
+cat conf/standalone.conf
+
+docker exec -it pulsar sh
+bin/pulsar-admin topics
+
+bin/pulsar-admin functions-worker get-cluster
