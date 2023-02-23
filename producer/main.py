@@ -8,7 +8,7 @@ import pulsar
 
 serverUrl = "pulsar://localhost:6650"
 topic =  'persistent://public/default/mytopic'
-
+# connect url to the Pulsar broker
 client = pulsar.Client(serverUrl)
 
 producer = client.create_producer(
